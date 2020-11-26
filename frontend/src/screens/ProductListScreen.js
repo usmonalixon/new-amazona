@@ -10,7 +10,7 @@ export default function ProductListScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts());
-  }, [dispatch]);
+  }, []);
   const deleteHandler = () => {
     //   TODO: dispatch delete action
   };
