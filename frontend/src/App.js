@@ -9,11 +9,13 @@ import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 import ProductScreen from "./screens/ProductScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -60,6 +62,27 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Admin {""} <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productlist">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/userlist">Users</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <main>
@@ -76,6 +99,10 @@ function App() {
             path="/profile"
             component={ProfileScreen}
           ></PrivateRoute>
+          <AdminRoute
+            path="/productlist"
+            component={ProductListScreen}
+          ></AdminRoute>
           <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
         </main>
         <footer className="row center">All right reserved</footer>
