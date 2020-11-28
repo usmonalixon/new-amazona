@@ -5,6 +5,7 @@ import userRouter from "./routers/userRouter.js";
 import dotenv from "dotenv";
 import orderRouter from "./routers/orderRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
+import path from "path";
 
 const app = express();
 
@@ -18,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/newamazona", {
   useUnifiedTopology: true,
 });
 
+const __dirname = path.resolve();
+
 app.use("/api/uploads", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
@@ -28,6 +31,8 @@ app.get("/api/config/paypal", (req, res) => {
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
+
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
