@@ -123,6 +123,11 @@ export default function ProductEditScreen(props) {
               />
             </div>
             <div>
+              {" "}
+              <label htmlFor="imageFile">Image File</label>
+              <input type="file" id="imageFile" label="Choose Image" onChange={}/>
+            </div>
+            <div>
               <label htmlFor="countInStock"> Count In Stock</label>
               <input
                 type="text"

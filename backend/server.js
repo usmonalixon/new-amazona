@@ -4,6 +4,7 @@ import productRouter from "./routers/productRouter.js";
 import userRouter from "./routers/userRouter.js";
 import dotenv from "dotenv";
 import orderRouter from "./routers/orderRouter.js";
+import uploadRouter from "./routers/uploadRouter.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/newamazona", {
   useUnifiedTopology: true,
 });
 
+app.use("/api/uploads", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
