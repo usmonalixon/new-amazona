@@ -5,7 +5,7 @@ import {
   deleteProduct,
   listProducts,
 } from "../actions/productActions";
-import LoadingBox from "../components/LoadingBox";
+import LoadingBox from "../components/LoadingBox.js";
 import MessageBox from "../components/MessageBox";
 import {
   PRODUCT_CREATE_RESET,
@@ -38,7 +38,7 @@ export default function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
+  }, []);
 
   const createHandler = () => {
     dispatch(createProduct());
