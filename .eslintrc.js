@@ -1,26 +1,17 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
+    es2021: true,
     node: true,
   },
-  extends: ["plugin:react/recommended", "airbnb-base", "prettier"],
+  extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 11,
+    ecmaVersion: 12,
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {
-    "react/jsx-filename-extension": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "no-nested-ternary": 0,
-    "react/prop-types": 0,
-    "react/destructuring-assignment": 0,
-    "no-underscore-dangle": 0,
-    "import/extensions": 0,
-    "jsx-a11y/label-has-associated-control": 0,
-  },
+  rules: {},
 };

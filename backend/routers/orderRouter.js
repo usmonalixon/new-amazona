@@ -10,14 +10,19 @@ orderRouter.get(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id });
-  res.send(orders);
+    res.send(orders);
   })
 );
 
-orderRouter.get('/',isAuth,isAdmin,expressAsyncHandler(async (req, res)=>{
-  const orders = await Order.find({}).populate('user', 'name');
-  res.send(orders)
-}))
+orderRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate("user", "name");
+    res.send(orders);
+  })
+);
 
 orderRouter.post(
   "/",
@@ -75,6 +80,21 @@ orderRouter.put(
       res.send({ message: "Order is paid", order: updatedOrder });
     } else {
       res.status(404).send({ message: "Order not Found" });
+    }
+  })
+);
+
+orderRouter.delete(
+  "/:id",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      const deletedOrder = await order.remove();
+      res.send({ message: "Order Deleted", order: deletedOrder });
+    } else {
+      res.status(404).send({ message: "Order not Found." });
     }
   })
 );
