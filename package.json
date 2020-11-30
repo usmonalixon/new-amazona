@@ -38,6 +38,7 @@
     "prettier": "^2.2.0"
   },
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "repository": {
@@ -49,5 +50,9 @@
   "bugs": {
     "url": "https://github.com/usmonalixon/new-amazona/issues"
   },
-  "homepage": "https://github.com/usmonalixon/new-amazona#readme"
+  "homepage": "https://github.com/usmonalixon/new-amazona#readme",
+  "engines": {
+    "node": "12.4.0",
+    "npm": "6.9.0"
+  }
 }
