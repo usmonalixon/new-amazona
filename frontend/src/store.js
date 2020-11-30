@@ -1,42 +1,43 @@
-import { createStore, compose, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
-import { cartReducer } from "./reducers/cartReducers.js";
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import { cartReducer } from './reducers/cartReducers.js';
 import {
   orderCreateReducer,
   orderDeleteReducer,
+  orderDeliverReducer,
   orderDetailsReducer,
   orderListReducer,
   orderMineListReducer,
   orderPayReducer,
-} from "./reducers/orderReducers.js";
+} from './reducers/orderReducers.js';
 import {
   productCreateReducer,
   productDeleteReducer,
   productDetailsReducer,
   productListReducer,
   productUpdateReducer,
-} from "./reducers/productReducers.js";
+} from './reducers/productReducers.js';
 import {
   userDetailsReducer,
   userRegisterReducer,
   userSigninReducer,
   userUpdateProfileReducer,
-} from "./reducers/userReducers.js";
+} from './reducers/userReducers.js';
 
 const initialState = {
   userSignin: {
-    userInfo: localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo"))
+    userInfo: localStorage.getItem('userInfo')
+      ? JSON.parse(localStorage.getItem('userInfo'))
       : null,
   },
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
-    shippingAddress: localStorage.getItem("shippingAddress")
-      ? JSON.parse(localStorage.getItem("shippingAddress"))
+    shippingAddress: localStorage.getItem('shippingAddress')
+      ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
-    paymentMethod: "PayPal",
+    paymentMethod: 'PayPal',
   },
 };
 const reducer = combineReducers({
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   orderList: orderListReducer,
   orderDelete: orderDeleteReducer,
+  orderDeliver: orderDeliverReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

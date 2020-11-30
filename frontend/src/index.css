@@ -18,9 +18,9 @@ body {
 .grid-container {
   display: grid;
   grid-template-areas:
-    "header"
-    "main"
-    "footer";
+    'header'
+    'main'
+    'footer';
   grid-template-columns: 1fr;
   grid-template-rows: 5rem 1fr 5rem;
   height: 100%;
@@ -194,7 +194,11 @@ img.large {
 }
 .alert-danger {
   color: #a02020;
-  background-color: #ffe0e0e0;
+  background-color: #ffe0e0;
+}
+.alert-success {
+  color: #20a020;
+  background-color: #eeffe0;
 }
 /* Form */
 .form {
@@ -209,7 +213,7 @@ img.large {
 .form label {
   margin: 1rem 0;
 }
-/* DropDown */
+/* Dropdown */
 .dropdown {
   display: inline-block;
   position: relative;
@@ -222,7 +226,8 @@ img.large {
   padding: 1rem;
   z-index: 1;
   background-color: #203040;
-  margin: 0.4rem;
+  margin: 0;
+  margin-top: 0.4rem;
   border-radius: 0.5rem;
 }
 .dropdown:hover .dropdown-content {
@@ -240,20 +245,20 @@ img.large {
   border-top-color: #f08000;
   color: #f08000;
 }
-
 /* Table */
-.table{
+.table {
   width: 100%;
   border-collapse: collapse;
 }
-.table body tr:nth-of-type(odd){
+.table tbody tr:nth-of-type(odd) {
   background-color: #f4f4f4;
 }
-.table td, .table th{
+.table td,
+.table th {
   text-align: left;
-  border: 0.1rem #e4e4e4 solid;
+  border: 0.1rem solid #e4e4e4;
   padding: 0.5rem;
 }
-.table button{
-  margin: 0 0.2rem; 
+.table button {
+  margin: 0 0.2rem;
 }
