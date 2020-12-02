@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   createProduct,
   deleteProduct,
   listProducts,
-} from "../actions/productActions";
-import LoadingBox from "../components/LoadingBox.js";
-import MessageBox from "../components/MessageBox";
+} from '../actions/productActions';
+import LoadingBox from '../components/LoadingBox.js';
+import MessageBox from '../components/MessageBox';
 import {
   PRODUCT_CREATE_RESET,
   PRODUCT_DELETE_RESET,
-} from "../constants/productConstants";
+} from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   const dispatch = useDispatch();
@@ -37,14 +40,22 @@ export default function ProductListScreen(props) {
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts());
-  }, []);
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+  }, [
+    createdProduct,
+    dispatch,
+    props.history,
+    sellerMode,
+    successCreate,
+    successDelete,
+    userInfo,
+  ]);
 
   const createHandler = () => {
     dispatch(createProduct());
   };
   const deleteHandler = (product) => {
-    if (window.confirm("Are you sure To Delete?")) {
+    if (window.confirm('Are you sure To Delete?')) {
       dispatch(deleteProduct(product._id));
     }
   };
