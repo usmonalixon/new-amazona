@@ -138,8 +138,8 @@ a.brand {
 .min-30 {
   min-width: 30rem;
 }
-.p-1{
-    padding: 1rem;
+.p-1 {
+  padding: 1rem;
 }
 /* Image */
 img {
@@ -269,4 +269,9 @@ img.large {
 }
 .table button {
   margin: 0 0.2rem;
+}
+
+/* Carousel */
+.carousel .slide img {
+  max-width: 30rem;
 }
