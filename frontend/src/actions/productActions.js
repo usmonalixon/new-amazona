@@ -14,16 +14,15 @@ import {
   PRODUCT_LIST_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_REQUEST,
-  PRODUCT_UPDATE_RESET,
   PRODUCT_UPDATE_SUCCESS,
 } from '../constants/productConstants.js';
 
-export const listProducts = ({ seller = '' }) => async (dispatch) => {
+export const listProducts = ({ seller = '', name='' }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/products?seller=${seller}`);
+    const { data } = await Axios.get(`/api/products?seller=${seller}&name=${name}`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
