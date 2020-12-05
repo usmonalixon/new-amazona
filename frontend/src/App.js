@@ -13,8 +13,6 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductScreen from './screens/ProductScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import LoadingBox from './components/LoadingBox';
-import MessageBox from './components/MessageBox';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
@@ -27,23 +25,26 @@ import SellerScreen from './screens/SellerScreen';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
+import LoadingBox from './components/LoadingBox';
+import MessageBox from './components/MessageBox';
 
 function App() {
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const dispatch = useDispatch();
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
+
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
   } = productCategoryList;
-  const dispatch = useDispatch();
-  const signoutHandler = () => {
-    dispatch(signout());
-  };
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
@@ -142,9 +143,9 @@ function App() {
             <li>
               <strong>Categories</strong>
               <button
-                type="button"
                 onClick={() => setSidebarIsOpen(false)}
                 className="close-sidebar"
+                type="button"
               >
                 <i className="fa fa-close"></i>
               </button>
@@ -159,7 +160,8 @@ function App() {
                   <Link
                     to={`/search/category/${c}`}
                     onClick={() => setSidebarIsOpen(false)}
-                  >{c}
+                  >
+                    {c}
                   </Link>
                 </li>
               ))
@@ -167,6 +169,7 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route
@@ -193,6 +196,11 @@ function App() {
           ></Route>
           <Route
             path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
             component={SearchScreen}
             exact
           ></Route>
@@ -223,7 +231,7 @@ function App() {
             path="/orderlist/seller"
             component={OrderListScreen}
           ></SellerRoute>
-          <Route path="/seller/:id" component={SellerScreen}></Route>
+
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">All right reserved</footer>
